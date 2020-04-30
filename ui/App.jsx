@@ -13,7 +13,7 @@ const App = props => {
   const [event, setEvent] = useState('default');
 
   return (
-    <div>
+    <div className="container">
       <h1>{TEXTS.HOME_TITLE}</h1>
 
       <EventSelector

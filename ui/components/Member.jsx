@@ -7,12 +7,12 @@ const formatDate = date => {
   if (!date) {
     return 'N/A';
   }
-  return format(date, 'MM/dd/yyyy, HH:mm')
+  return format(date, 'MM/dd/yyyy, HH:mm');
 };
 
 export const Member = ({ member, onCheckIn, onCheckOut }) => {
   return (
-    <div>
+    <li>
       <div>Name: {`${member.firstName} ${member.lastName}`}</div>
       <div>Company Name: {member.companyName || 'N/A'}</div>
       <div>Title: {member.title || 'N/A'}</div>
@@ -28,7 +28,6 @@ export const Member = ({ member, onCheckIn, onCheckOut }) => {
           Check-out {`${member.firstName} ${member.lastName}`}
         </button>
       ) : null}
-      <hr />
-    </div>
+    </li>
   );
 };

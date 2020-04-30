@@ -2,3 +2,65 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+.container {
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+.select-css {
+	display: block;
+	box-sizing: border-box;
+	font-size: 1rem;
+	font-weight: 700;
+	color: #444;
+	width: 20rem;
+	max-width: 100%;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+  background-color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 1em;
+}
+
+.select-css:hover {
+	border-color: #888;
+}
+.select-css:focus {
+	border-color: #aaa;
+	box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+	color: #222;
+	outline: none;
+}
+.select-css option {
+	font-weight:normal;
+}
+
+.statistics {
+  padding: 1em;
+  border: #888 1px solid;
+  border-radius: 0.5em;
+  margin: 1.5rem 0;
+}
+
+button {
+  padding: 1em 1.5em;
+  margin: 0.5rem 0;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+ul > li {
+  list-style: none;
+}
+
+ul > li + li {
+  margin-top: 1.5rem;
+  border-bottom: #444 1px solid;
+}

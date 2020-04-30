@@ -33,7 +33,7 @@ export const Statistics = ({
     return null;
   }
   return (
-    <div>
+    <div className="statistics">
       <div>{`People in the event right now: ${membersCount}`}</div>
       <div>{`People by company in the event right now: ${membersGroupedByCompany
         .map(({ name, count }) => `${name} (${count})`)

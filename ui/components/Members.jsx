@@ -20,14 +20,18 @@ const Members = ({ communityId, members }) => {
   } else if (!members.length) {
     return <p>There is no member in the community selected</p>;
   } else {
-    return members.map(member => (
-      <Member
-        member={member}
-        key={member._id}
-        onCheckIn={() => handleCheckIn(member)}
-        onCheckOut={() => handleCheckOut(member)}
-      />
-    ));
+    return (
+      <ul>
+        {members.map(member => (
+          <Member
+            member={member}
+            key={member._id}
+            onCheckIn={() => handleCheckIn(member)}
+            onCheckOut={() => handleCheckOut(member)}
+          />
+        ))}
+      </ul>
+    );
   }
 };
 
