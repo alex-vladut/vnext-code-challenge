@@ -26,8 +26,8 @@ const Members = ({ communityId, members }) => {
           <Member
             member={member}
             key={member._id}
-            onCheckIn={() => handleCheckIn(member)}
-            onCheckOut={() => handleCheckOut(member)}
+            onCheckIn={handleCheckIn}
+            onCheckOut={handleCheckOut}
           />
         ))}
       </ul>
