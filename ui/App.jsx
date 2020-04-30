@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { TEXTS } from '../shared/constants';
 
@@ -56,11 +57,11 @@ const App = props => {
   }, [event, setMembers]);
 
   const handleCheckIn = member => {
-    People.update(member._id, { $set: { checkedInAt: new Date() } });
+    Meteor.call('people.checkIn', member._id);
   };
 
   const handleCheckOut = member => {
-    People.update(member._id, { $set: { checkedOutAt: new Date() } });
+    Meteor.call('people.checkOut', member._id);
   };
 
   const renderStats = () => {
