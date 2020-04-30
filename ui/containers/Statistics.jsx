@@ -6,6 +6,7 @@ import { People } from '../../collections/people';
 
 const groupByCompany = members => {
   const result = members
+    // some of the members don't have company details, so will be filtered out
     .filter(member => !!member.companyName)
     .reduce(
       (acc, value) => ({
@@ -14,19 +15,23 @@ const groupByCompany = members => {
       }),
       {}
     );
-  return Object.entries(result)
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => {
-      if (a.count > b.count) return -1;
-      if (b.count > a.count) return 1;
-      return 0;
-    });
+  return (
+    Object.entries(result)
+      .map(([name, count]) => ({ name, count }))
+      // for convenience, the companies will be displayed in descending order based on the number of employees attending the event
+      .sort((a, b) => {
+        if (a.count > b.count) return -1;
+        if (b.count > a.count) return 1;
+        return 0;
+      })
+      .map(({ name, count }) => `${name} (${count})`)
+      .join(', ')
+  );
 };
 
 export const Statistics = ({
   communityId,
-  membersCount,
-  membersGroupedByCompany,
+  membersInEvent,
   membersNotCheckedIn,
 }) => {
   if (communityId === 'default') {
@@ -34,10 +39,10 @@ export const Statistics = ({
   }
   return (
     <div className="statistics">
-      <div>{`People in the event right now: ${membersCount}`}</div>
-      <div>{`People by company in the event right now: ${membersGroupedByCompany
-        .map(({ name, count }) => `${name} (${count})`)
-        .join(', ')}`}</div>
+      <div>{`People in the event right now: ${membersInEvent.length}`}</div>
+      <div>{`People by company in the event right now: ${groupByCompany(
+        membersInEvent
+      )}`}</div>
       <div>{`People not checked-in: ${membersNotCheckedIn}`}</div>
     </div>
   );
@@ -51,10 +56,13 @@ export default withTracker(({ communityId }) => {
   Meteor.subscribe('people.byCommunityId', communityId);
   return {
     communityId,
-    membersCount: People.find({ communityId }).count(),
-    membersGroupedByCompany: groupByCompany(
-      People.find({ communityId }).fetch()
-    ),
+    // will find all the people who were checked in for the event (i.e. have "checkedInAt" field set)
+    // and who are not yet checked out of the event (i.e. the field "checkedOutAt" is not set)
+    membersInEvent: People.find({
+      communityId,
+      checkedInAt: { $exists: true },
+      checkedOutAt: { $exists: false },
+    }).fetch(),
     membersNotCheckedIn: People.find({
       communityId,
       checkedInAt: { $exists: false },
