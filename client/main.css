@@ -62,5 +62,6 @@ ul > li {
 
 ul > li + li {
   margin-top: 1.5rem;
-  border-bottom: #444 1px solid;
+  padding-top: 1em;
+  border-top: #444 1px solid;
 }
