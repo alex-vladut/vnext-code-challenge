@@ -6,8 +6,9 @@ import { TEXTS } from '../shared/constants';
 import { Communities } from '../collections/communities';
 
 import { EventSelector } from './components/EventSelector';
-import Statistics from './components/Statistics';
-import Members from './components/Members';
+
+import Statistics from './containers/Statistics';
+import Members from './containers/Members';
 
 const App = props => {
   const [event, setEvent] = useState('default');

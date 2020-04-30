@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 import { People } from '../../collections/people';
 
-import { Member } from './Member';
+import { Member } from '../components/Member';
 
 const Members = ({ communityId, members }) => {
   const handleCheckIn = member => {

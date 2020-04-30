@@ -35,6 +35,8 @@ export const Member = ({ member, onCheckIn, onCheckOut }) => {
     if (checkedIn && !isCheckedOut(member)) {
       const difference = differenceInSeconds(new Date(), member.checkedInAt);
       if (difference < 5) {
+        // If the member was just checked in to the event (i.e. less than 5 seconds ago)
+        // then a timer will be set so that the checkout button will be displayed immediately when it is allowed to check out
         setTimeout(() => setShowCheckOut(true), (5 - difference) * 1000);
       }
     }
